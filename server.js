@@ -1,7 +1,6 @@
 var express = require("express");
-// var mongoose = require("mongoose");
-require("dotenv").config();
-var mongojs = require("mongojs");
+var mongoose = require("mongoose");
+// var mongojs = require("mongojs");
 
 //Scraping tools
 var axios = require("axios");
@@ -11,89 +10,91 @@ var PORT = process.env.PORT || 8080;
 
 var app = express();
 
-var databaseUrl = "newscrepe";
-var collections = ["articles"]
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.static("public"));
+
+mongoose.connect("mongodb://localhost/newscrepe", {useNewUrlParser: true});
+
+// var databaseUrl = "newscrepe";
+// var collections = ["articles"]
 
 // //Require models
-// var db = require("./models");
-var db = mongojs(databaseUrl, collections);
-db.on("error", function(error) {
-    console.log("Database Error: ", error);
-});
+var db = require("./models");
 
-app.get("/", function(req, res) {
-    res.send("Hello World!");
-});
+// var db = mongojs(databaseUrl, collections);
+// db.on("error", function(error) {
+//     console.log("Database Error: ", error);
+// });
 
-app.get("/all", function(req, res) {
-    db.articles.find({}, function(error, found) {
-        if (error) {
-            console.log(error);
-        } else {
-            res.json(found);
-        }
-    });
-});
+// app.get("/", function(req, res) {
+//     res.send("Hello World!");
+// });
 
-console.log("Scraping");
+// app.get("/all", function(req, res) {
+//     db.articles.find({}, function(error, found) {
+//         if (error) {
+//             console.log(error);
+//         } else {
+//             res.json(found);
+//         }
+//     });
+// });
 
+// console.log("Scraping");
+
+//scrape articles
 app.get("/scrape", function(req, res) {
 
     axios.get("https://www.saveur.com/").then(function(res) {
         var $ = cheerio.load(res.data);
 
-        var results = [];
-
         $("li.feed_driven_flex_feature_story").each(function(i, element) {
 
-            var title = $(element).find("div.headline").text();
-            var link = $(element).find("a").attr("href");
+            var result = {};
 
-            if (title && link) {
-                db.articles.insert({
-                    title: title,
-                    link: link
-                },
-                function(err, inserted) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log(inserted);
-                    }
-                })
-            }
-            results.push({
-                title: title,
-                link: "https://www.saveur.com/" + link
-            });
+            result.title = $(element).find("div.headline").text();
+
+            result.link = $(element).find("a").attr("href");
+
+            db.Article.create(result).then(function(dbArticle) {
+                console.log(dbArticle);
+            }).catch(function(err) {
+                console.log(err);
+            })
         });
 
-        console.log(results);
     });
 
     res.send("Scrape Complete");
 
 });
 
-app.listen(8080, function() {
-    console.log("App running port 8080");
+//display all articles
+app.get("/articles", function(req, res) {
+
+    db.Article.find({}).then(function(dbArticle) {
+
+        res.json(dbArticle);
+
+    }).catch(function(err) {
+
+        res.json(err);
+
+    });
 });
 
-// axios.get("https://www.saveur.com/").then(function(res) {
-//     var $ = cheerio.load(res.data);
+//get article by id
+app.get("/articles/:id", function(req, res) {
+    db.Article.findOne({ _id: req.params.id})
 
-//     var results = [];
+    .then(function(dbArticle) {
+        res.json(dbArticle);
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
 
-//     $("li.feed_driven_flex_feature_story").each(function(i, element) {
-
-//         var title = $(element).find("div.headline").text();
-//         var link = $(element).find("a").attr("href");
-
-//         results.push({
-//             title: title,
-//             link: "https://www.saveur.com/" + link
-//         });
-//     });
-
-//     console.log(results);
-// })
+app.listen(PORT, function() {
+    console.log("App running port " + PORT);
+});
