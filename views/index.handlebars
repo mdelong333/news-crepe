@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="headline">
+        {{#if articles}}
+            {{#each articles}}
+                {{#unless saved}}
+                    <div class="article-div container">
+                        <img src="{{image}}" data-src="{{image}}" class="img right">
+                        <a href="https://www.saveur.com/{{link}}"><h6>{{title}}</h6></a>
+                        <p>{{summary}}</p>
+                    </div>
+                {{/unless}}
+            {{/each}}
+        {{/if}}
+    </div>
+</div>
+

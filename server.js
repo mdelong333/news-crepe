@@ -38,6 +38,10 @@ app.get("/scrape", function(req, res) {
 
             result.link = $(element).find("a").attr("href");
 
+            result.summary = $(element).find("div.subtitle").text();
+
+            result.image = $(element).find("img.responsive_image").attr("src");
+
             db.Article.create(result).then(function(dbArticle) {
                 console.log(dbArticle);
             }).catch(function(err) {

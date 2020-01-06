@@ -14,9 +14,9 @@ $("#scrape").on("click", function(event) {
     $.ajax({
         method: "GET",
         url: "/scrape"
-    }).done(function(data) {
+    }).then(function(data) {
         console.log(data);
-        window.location="/"
+        location.reload();
     })
 });
 
@@ -26,7 +26,7 @@ $("#clear").on("click", function(event) {
     $.ajax({
         method: "GET",
         url: "/clear"
-    }).done(function(data) {
+    }).then(function(data) {
         console.log(data);
         window.location="/"
     })
