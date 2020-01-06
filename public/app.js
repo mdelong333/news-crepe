@@ -19,3 +19,15 @@ $("#scrape").on("click", function(event) {
         window.location="/"
     })
 });
+
+$("#clear").on("click", function(event) {
+    event.preventDefault();
+
+    $.ajax({
+        method: "GET",
+        url: "/clear"
+    }).done(function(data) {
+        console.log(data);
+        window.location="/"
+    })
+})

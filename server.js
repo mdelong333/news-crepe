@@ -62,25 +62,28 @@ app.get("/scrape", function(req, res) {
 app.get("/articles", function(req, res) {
 
     db.Article.find({}).then(function(dbArticle) {
-
         res.json(dbArticle);
-
     }).catch(function(err) {
-
         res.json(err);
-
     });
 });
 
 //get article by id
 app.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id})
-
     .then(function(dbArticle) {
         res.json(dbArticle);
     }).catch(function(err) {
         res.json(err);
     });
+});
+
+app.get("/clear", function(req, res) {
+    db.Article.deleteMany({})
+    .catch(function(err) {
+        console.log(err);
+    });
+    res.send("Articles deleted")
 });
 
 app.listen(PORT, function() {
