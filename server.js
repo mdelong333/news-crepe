@@ -1,47 +1,30 @@
 var express = require("express");
 var mongoose = require("mongoose");
-// var mongojs = require("mongojs");
+var hbs = require("express-handlebars");
 
 //Scraping tools
 var axios = require("axios");
 var cheerio = require("cheerio");
 
+//Require models
+var db = require("./models");
+
 var PORT = process.env.PORT || 8080;
 
 var app = express();
+
+//Handlebars setup
+// app.engine("hbs", hbs({extname: "hbs", defaultLayout: "main", layoutsDir: __dirname + "views/layouts/"}));
+// // app.set("views", path.join(__dirname, "views"));
+// app.set("view engine", "hbs");
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/newscrepe", {useNewUrlParser: true});
+require("./routes/htmlRoutes")(app);
 
-// var databaseUrl = "newscrepe";
-// var collections = ["articles"]
-
-// //Require models
-var db = require("./models");
-
-// var db = mongojs(databaseUrl, collections);
-// db.on("error", function(error) {
-//     console.log("Database Error: ", error);
-// });
-
-// app.get("/", function(req, res) {
-//     res.send("Hello World!");
-// });
-
-// app.get("/all", function(req, res) {
-//     db.articles.find({}, function(error, found) {
-//         if (error) {
-//             console.log(error);
-//         } else {
-//             res.json(found);
-//         }
-//     });
-// });
-
-// console.log("Scraping");
+mongoose.connect("mongodb://localhost/newscrepe", {useUnifiedTopology: true});
 
 //scrape articles
 app.get("/scrape", function(req, res) {
