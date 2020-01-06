@@ -1,4 +1,4 @@
 module.exports = {
     Article: require("./Article"),
-    Fave: require("./Fave")
+    // Fave: require("./Fave")
 };

@@ -1,9 +1,6 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var hbs = require("express-handlebars");
-var path = require("path");
-
-//Scraping tools
 var axios = require("axios");
 var cheerio = require("cheerio");
 
@@ -15,21 +12,17 @@ var PORT = process.env.PORT || 8080;
 var app = express();
 
 //Handlebars setup
-// app.engine("hbs", hbs({extname: "hbs", defaultLayout: "main", layoutsDir: __dirname + "views/layouts/"}));
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "hbs");
+app.engine("handlebars", hbs({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static("public"));
 
-require("./routes/htmlRoutes")(app);
+var routes = require("./routes/htmlRoutes");
+app.use(routes);
 
 mongoose.connect("mongodb://localhost/newscrepe", {useUnifiedTopology: true});
-
-app.get("/", function(req, res) {
-    
-})
 
 //scrape articles
 app.get("/scrape", function(req, res) {
