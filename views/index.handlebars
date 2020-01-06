@@ -4,9 +4,10 @@
             {{#each articles}}
                 {{#unless saved}}
                     <div class="article-div container">
-                        <img src="{{image}}" data-src="{{image}}" class="img right">
+                        <img src="{{image}}" data-src="{{image}}" class="img left">
                         <a href="https://www.saveur.com/{{link}}"><h6>{{title}}</h6></a>
                         <p>{{summary}}</p>
+                        <button class="btn right save" type="submit" data-id="{{_id}}">Save</button>
                     </div>
                 {{/unless}}
             {{/each}}

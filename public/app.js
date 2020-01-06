@@ -6,28 +6,43 @@
 //         $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
 //     }
 // });
+$(document).ready(function() {
 
+    $(".scrape").on("click", function(event) {
+        event.preventDefault();
+        $.ajax({
+            method: "GET",
+            url: "/scrape"
+        }).then(function(data) {
+            console.log(data);
+            location.reload();
+        });
+    });
 
-$("#scrape").on("click", function(event) {
-    event.preventDefault();
+    $(".clear").on("click", function(event) {
+        event.preventDefault();
 
-    $.ajax({
-        method: "GET",
-        url: "/scrape"
-    }).then(function(data) {
-        console.log(data);
-        location.reload();
-    })
+        $.ajax({
+            method: "GET",
+            url: "/clear"
+        }).then(function(data) {
+            console.log(data);
+            window.location="/";
+        });
+    });
+
+    $(".save").on("click", function(event) {
+        event.preventDefault();
+        console.log("click");
+        var id = $(this).attr("data-id");
+        console.log(id);
+
+        $.ajax({
+            method: "POST",
+            url: "/articles/saved" + id
+        }).then(function(data) {
+            window.location = "/";
+        });
+    });
+
 });
-
-$("#clear").on("click", function(event) {
-    event.preventDefault();
-
-    $.ajax({
-        method: "GET",
-        url: "/clear"
-    }).then(function(data) {
-        console.log(data);
-        window.location="/"
-    })
-})

@@ -1,8 +1,7 @@
 var express = require("express");
 var mongoose = require("mongoose");
 var hbs = require("express-handlebars");
-var axios = require("axios");
-var cheerio = require("cheerio");
+var router = express.Router();
 
 //Require models
 var db = require("./models");
@@ -19,61 +18,35 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static("public"));
 
-var routes = require("./routes/htmlRoutes");
-app.use(routes);
+//Routes
+var scrapeR = require("./routes/scrape");
+app.use(scrapeR);
+var articlesR = require("./routes/articles");
+app.use(articlesR);
 
 mongoose.connect("mongodb://localhost/newscrepe", {useUnifiedTopology: true});
 
-//scrape articles
-app.get("/scrape", function(req, res) {
+//articles api
+// app.get("/articles", function(req, res) {
 
-    axios.get("https://www.saveur.com/").then(function(res) {
-        var $ = cheerio.load(res.data);
+//     db.Article.find({}).then(function(dbArticle) {
+//         res.json(dbArticle);
+//     }).catch(function(err) {
+//         res.json(err);
+//     });
+// });
 
-        $("li.feed_driven_flex_feature_story").each(function(i, element) {
 
-            var result = {};
-
-            result.title = $(element).find("div.headline").text();
-
-            result.link = $(element).find("a").attr("href");
-
-            result.summary = $(element).find("div.subtitle").text();
-
-            result.image = $(element).find("img.responsive_image").attr("src");
-
-            db.Article.create(result).then(function(dbArticle) {
-                console.log(dbArticle);
-            }).catch(function(err) {
-                console.log(err);
-            })
-        });
-
-    });
-
-    res.send("Scrape Complete");
-
-});
-
-//display all articles
-app.get("/articles", function(req, res) {
-
-    db.Article.find({}).then(function(dbArticle) {
-        res.json(dbArticle);
-    }).catch(function(err) {
-        res.json(err);
-    });
-});
 
 //get article by id
-app.get("/articles/:id", function(req, res) {
-    db.Article.findOne({ _id: req.params.id})
-    .then(function(dbArticle) {
-        res.json(dbArticle);
-    }).catch(function(err) {
-        res.json(err);
-    });
-});
+// app.get("/articles/:id", function(req, res) {
+//     db.Article.findOne({ _id: req.params.id})
+//     .then(function(dbArticle) {
+//         res.json(dbArticle);
+//     }).catch(function(err) {
+//         res.json(err);
+//     });
+// });
 
 app.get("/clear", function(req, res) {
     db.Article.deleteMany({})

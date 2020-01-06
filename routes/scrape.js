@@ -1,0 +1,44 @@
+var express = require("express");
+var router = express.Router();
+var db = require("../models");
+var axios = require("axios");
+var cheerio = require("cheerio");
+
+router.get("/", function(req, res) {
+    db.Article.find({}).then(function(articles) {
+        res.render("index", { articles })
+    })
+})
+
+//scrape articles
+router.get("/scrape", function(req, res) {
+
+    axios.get("https://www.saveur.com/").then(function(res) {
+        var $ = cheerio.load(res.data);
+
+        $("li.feed_driven_flex_feature_story").each(function(i, element) {
+
+            var result = {};
+
+            result.title = $(element).find("div.headline").text();
+
+            result.link = $(element).find("a").attr("href");
+
+            result.summary = $(element).find("div.subtitle").text();
+
+            result.image = $(element).find("img.responsive_image").attr("src");
+
+            db.Article.create(result).then(function(dbArticle) {
+                console.log(dbArticle);
+            }).catch(function(err) {
+                console.log(err);
+            });
+        });
+
+    });
+
+    res.send("Scrape Complete");
+
+});
+
+module.exports = router;
