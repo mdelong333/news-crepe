@@ -6,9 +6,9 @@ $(document).ready(function() {
         $.ajax({
             method: "GET",
             url: "/scrape"
-        }).then(function(data) {
-            console.log(data);
-            location.reload();
+        }).then(function(articles) {
+            console.log(articles);
+            res.render("index", { articles })
         })
     });
     

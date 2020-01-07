@@ -3,14 +3,12 @@
     <div class="container col s12">
         {{#if articles}}
             {{#each articles}}
-                {{#unless saved}}
                     <div class="article-div card-panel">
                         <img src="{{image}}" width="100px" data-src="{{image}}" class="img left">
                         <a href="https://www.saveur.com/{{link}}"><h5>{{title}}</h5></a>
                         <p>{{summary}}</p>
                         <button class="btn right save" type="submit" data-id="{{_id}}">Save</button>
                     </div>
-                {{/unless}}
             {{/each}}
         {{/if}}
     </div>

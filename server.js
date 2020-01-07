@@ -75,8 +75,8 @@ app.put("/articles/:id", function(req, res) {
 });
 
 app.get("/saved", function(req, res) {
-    db.Article.find({saved: true}).then(function(dbArticle) {
-        res.json(dbArticle);
+    db.Article.find({saved: true}).then(function(articles) {
+        res.render("saved", { articles } );
     }).catch(function(err) {
         res.json(err);
     });
