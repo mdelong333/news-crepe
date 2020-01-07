@@ -20,9 +20,8 @@ app.use(express.static("public"));
 var routes = require("./controller/routes");
 app.use(routes);
 
-mongoose.connect(MONGODB_URI, {useUnifiedTopology: true});
-
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newscrepe"
+mongoose.connect(MONGODB_URI, {useUnifiedTopology: true});
 
 app.listen(PORT, function() {
     console.log("App running port " + PORT);
