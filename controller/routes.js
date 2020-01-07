@@ -66,7 +66,7 @@ router.put("/articles/remove/:id", function(req, res) {
     });
 });
 
-//get saved articles
+//get all saved articles
 router.get("/saved", function(req, res) {
     db.Article.find({saved: true}).then(function(articles) {
         res.render("saved", { articles });
@@ -75,6 +75,7 @@ router.get("/saved", function(req, res) {
     });
 });
 
+//delete all articles from db
 router.get("/clear", function(req, res) {
     db.Article.deleteMany({})
     .catch(function(err) {
