@@ -52,6 +52,8 @@ app.get("/scrape", function(req, res) {
     });
 
     res.send("Scrape Complete");
+    location.reload();
+    res.render("index", { articles })
 
 });
 
@@ -69,6 +71,15 @@ app.put("/articles/:id", function(req, res) {
     db.Article.findOneAndUpdate({ _id: req.params.id}, {$set: {saved: true}})
     .then(function(dbArticle) {
         res.json(dbArticle);
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
+
+app.put("/articles/remove/:id", function(req, res) {
+    db.Article.findOneAndUpdate({ _id: req.params.id}, {$set: {saved: false}})
+    .then(function(article) {
+        res.json(article);
     }).catch(function(err) {
         res.json(err);
     });

@@ -8,7 +8,7 @@ $(document).ready(function() {
             url: "/scrape"
         }).then(function(articles) {
             console.log(articles);
-            res.render("index", { articles })
+            location.reload();
         })
     });
     
@@ -33,6 +33,20 @@ $(document).ready(function() {
         $.ajax({
             method: "PUT",
             url: "/articles/" + id,
+        }).then(function(data) {
+            location.reload();
+        });
+    });
+
+    $(".remove").on("click", function(event) {
+        event.preventDefault();
+        console.log("click")
+        var id = $(this).attr("data-id");
+        console.log(id);
+
+        $.ajax({
+            method: "PUT",
+            url: "/articles/remove/" + id,
         }).then(function(data) {
             location.reload();
         });
