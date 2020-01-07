@@ -14,3 +14,15 @@
 .remove {
     margin-right: 10px;
 }
+
+#save-note {
+    margin-right: 10px;
+}
+
+.input-field {
+    margin: 30px 20px;
+}
+
+.modal-header {
+    border-bottom: 2px solid gray;
+}

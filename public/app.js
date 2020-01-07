@@ -53,4 +53,8 @@ $(document).ready(function() {
         });
     });
 
+    $(".notes").on("click", function(event) {
+        event.preventDefault()
+    })
+
 });

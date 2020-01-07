@@ -17,7 +17,7 @@
                         <img src="{{image}}" width="100px" data-src="{{image}}" class="img left">
                         <a href="https://www.saveur.com/{{link}}"><h5>{{title}}</h5></a>
                         <p>{{summary}}</p>
-                        <button class="btn right notes" type="submit" data-id="{{_id}}">Notes</button>
+                        <button data-target="modal1" class="btn right notes modal-trigger" type="submit" data-id="{{_id}}">Notes</button>
                         <button class="btn right remove" type="submit" data-id="{{_id}}">Remove</button>
                     </div>
                 {{/if}}
@@ -26,3 +26,26 @@
     </div>
 </div>
 
+<!-- Modal Structure -->
+<div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4>Add A Note</h4>
+        </div>
+        <div class="modal-body">
+            <div class="input-field col s6">
+                <input id="title" type="text" class="validate new-note">
+                <label for="title">Title</label>
+            </div>
+            <div class="input-field col s6">
+                <textarea id="body" type="text" class="validate new-note materialize-textarea"></textarea>
+                <label for="body">Note Body</label>
+            </div>
+            <div class="note-div"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" id="save-note">Save Note</button>
+        <a href="#!" class="modal-close waves-effect waves-green btn">&times;</a>
+    </div>
+</div>
