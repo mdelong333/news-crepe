@@ -1,15 +1,16 @@
 $(document).ready(function() {
 
     $(".scrape").on("click", function(event) {
-        event.preventDefault();
+        // event.preventDefault();
     
         $.ajax({
             method: "GET",
             url: "/scrape"
-        }).then(function(articles) {
-            console.log(articles);
+        }).then(function(data) {
+            console.log(data);
+            window.location="/";
             location.reload();
-        })
+        });
     });
     
     $(".clear").on("click", function(event) {
@@ -21,8 +22,8 @@ $(document).ready(function() {
         }).then(function(data) {
             console.log(data);
             window.location="/"
-        })
-    })
+        });
+    });
 
     $(".save").on("click", function(event) {
         event.preventDefault();
@@ -33,7 +34,7 @@ $(document).ready(function() {
         $.ajax({
             method: "PUT",
             url: "/articles/" + id,
-        }).then(function(data) {
+        }).done(function(data) {
             location.reload();
         });
     });

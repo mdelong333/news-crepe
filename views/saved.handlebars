@@ -1,6 +1,15 @@
 <div class="row">
-    <div class="col s2"></div>
-    <div class="container col s12">
+    <div class="col s12">
+        <h5 class="card z-depth-3 col s12 center-align" id="headline">Your Saved Articles</h5>
+    </div>
+</div>
+
+<div class="parallax-container">
+    <div class="parallax"><img src="https://anaffairfromtheheart.com/wp-content/uploads/2016/06/Sweet-Crepes-with-Summer-Fruits3-720x540.jpg"></div>
+</div>
+
+<div class="row">
+    <div class="col s10 push-s1 article-container">
         {{#if articles}}
             {{#each articles}}
                 {{#if saved}}
@@ -15,3 +24,4 @@
         {{/if}}
     </div>
 </div>
+

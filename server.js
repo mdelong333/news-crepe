@@ -24,6 +24,14 @@ app.use(routes);
 
 mongoose.connect("mongodb://localhost/newscrepe", {useUnifiedTopology: true});
 
+app.get("/", function(req, res) {
+    db.Article.find({}).then(function(articles) {
+        res.render("index", articles);
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
+
 //scrape articles
 app.get("/scrape", function(req, res) {
 
@@ -42,8 +50,8 @@ app.get("/scrape", function(req, res) {
 
             result.image = $(element).find("img.responsive_image").attr("src");
 
-            db.Article.create(result).then(function(dbArticle) {
-                console.log(dbArticle);
+            db.Article.create(result).then(function(articles) {
+                console.log(articles);
             }).catch(function(err) {
                 console.log(err);
             })
@@ -52,21 +60,19 @@ app.get("/scrape", function(req, res) {
     });
 
     res.send("Scrape Complete");
-    location.reload();
-    res.render("index", { articles })
 
 });
 
 //display all articles
 app.get("/articles", function(req, res) {
-    db.Article.find({}).then(function(dbArticle) {
-        res.json(dbArticle);
+    db.Article.find({}).then(function(articles) {
+        res.json(articles);
     }).catch(function(err) {
         res.json(err);
     });
 });
 
-//get article by id
+//get article by id for save
 app.put("/articles/:id", function(req, res) {
     db.Article.findOneAndUpdate({ _id: req.params.id}, {$set: {saved: true}})
     .then(function(dbArticle) {
@@ -76,6 +82,7 @@ app.put("/articles/:id", function(req, res) {
     });
 });
 
+//get article by id to unsave
 app.put("/articles/remove/:id", function(req, res) {
     db.Article.findOneAndUpdate({ _id: req.params.id}, {$set: {saved: false}})
     .then(function(article) {
@@ -85,9 +92,10 @@ app.put("/articles/remove/:id", function(req, res) {
     });
 });
 
+//get saved articles
 app.get("/saved", function(req, res) {
     db.Article.find({saved: true}).then(function(articles) {
-        res.render("saved", { articles } );
+        res.render("saved", { articles });
     }).catch(function(err) {
         res.json(err);
     });
