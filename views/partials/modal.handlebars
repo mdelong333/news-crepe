@@ -13,7 +13,12 @@
             <textarea id="body" type="text" class="validate new-note materialize-textarea"></textarea>
             <label for="body">Note Body</label>
             </div>
-            <div class="note-div"></div>
+            <div class="note-div">
+                {{#each articles}}
+                    <h3>{{notes.title}}</h3>
+                    <h5>{{notes.body}}</h5>
+                {{/each}}
+            </div>
         </div>
     </div>
 

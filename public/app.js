@@ -63,12 +63,12 @@ $(document).ready(function() {
             $("#modal-title").text(data.title);
             $("#save-note").attr("data-id", data._id);
 
-            if (data.note) {
-                $(".note-div").append(`<div>
-                <h3>${data.note.title}</h3>
-                <h6>${data.note.body}</h6>
-                </div>`)
-            }
+            // if (data.notes) {
+            //     $(".note-div").append(`<div>
+            //     <h3>${data.notes.title}</h3>
+            //     <h5>${data.notes.body}</h5>
+            //     </div>`)
+            // }
         })
         
     })
