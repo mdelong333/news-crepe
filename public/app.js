@@ -7,7 +7,7 @@ $(document).ready(function() {
             url: "/scrape"
         }).then(function(data) {
             console.log(data);
-            location.redirect("/");
+            window.location="/";
         });
     });
     
@@ -19,7 +19,7 @@ $(document).ready(function() {
             url: "/clear"
         }).then(function(data) {
             console.log(data);
-            window.location="/"
+            window.location="/";
         });
     });
 

@@ -34,7 +34,7 @@ router.get("/scrape", function(req, res) {
     res.send("Scrape Complete");
 });
 
-//display all articles
+//get all articles
 router.get("/articles", function(req, res) {
     db.Article.find({}).then(function(dbArticle) {
         res.json(dbArticle);
@@ -46,7 +46,7 @@ router.get("/articles", function(req, res) {
 //get article by id
 router.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id })
-    .populate("notes").then(function(dbArticle) {
+    .populate("note").then(function(dbArticle) {
         res.json(dbArticle);
     }).catch(function(err) {
         res.json(err);
