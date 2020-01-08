@@ -30,17 +30,34 @@ router.get("/scrape", function(req, res) {
                 console.log(err);
             })
         });
-
     });
-
     res.send("Scrape Complete");
-
 });
 
 //display all articles
 router.get("/articles", function(req, res) {
-    db.Article.find({}).then(function(articles) {
-        res.json(articles);
+    db.Article.find({}).then(function(dbArticle) {
+        res.json(dbArticle);
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
+
+//get article by id
+router.get("/articles/:id", function(req, res) {
+    db.Article.findOne({ _id: req.params.id })
+    .populate("notes").then(function(dbArticle) {
+        res.json(dbArticle);
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
+
+router.post("/articles/:id", function(req, res) {
+    db.Note.create(req.body).then(function(dbNote) {
+        return db.Article.findOneAndUpdate({ _id: req.params.id}, { note: dbNote._id }, { new: true });
+    }).then(function(dbArticle) {
+        res.json(dbArticle);
     }).catch(function(err) {
         res.json(err);
     });
