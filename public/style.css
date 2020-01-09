@@ -38,6 +38,16 @@ body {
     background-color: #D0B172;
 }
 
+.nav-link {
+    font-size: 18px;
+    font-family: 'Lora', serif;
+    color: #1b2a41;
+}
+
+#home {
+    margin-left: 10px;
+}
+
 .sidenav {
     background-color: #e7dac2;
 }
@@ -46,6 +56,7 @@ body {
     background-color: #D0B172;
     border-bottom: 2px groove #e7dac2;
     color: #1b2a41;
+    font-family: 'Lora', serif;
 }
 
 .brand-logo {
@@ -58,8 +69,14 @@ body {
     font-family: 'Linden Hill', serif;
 }
 
+.btn:hover {
+    background-color: #1b2a41;
+    opacity: 0.8;
+}
+
 .page-footer {
     background-color: rgb(187, 159, 103);
+    font-family: 'Calligraffitti', cursive;
 }
 
 .footer {
@@ -69,4 +86,9 @@ body {
 
 .card-content {
     border-top: solid 1px #cd342e;
+    font-family: 'Lora', serif;
+}
+
+.article-title {
+    font-family: 'Linden Hill', serif;
 }

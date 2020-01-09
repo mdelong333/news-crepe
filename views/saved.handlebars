@@ -15,12 +15,17 @@
             {{#each articles}}
                 {{#if saved}}
                     <div class="article-div card-panel">
-                        <img src="{{image}}" width="100px" data-src="{{image}}" class="img left">
-                        <a href="https://www.saveur.com/{{link}}"><h5>{{title}}</h5></a>
-                        <p>{{summary}}</p>
-
-                        <button data-target="note-modal" class="btn right notes modal-trigger" type="submit" data-id="{{_id}}">Notes</button>
-                        <button class="btn right remove" type="submit" data-id="{{_id}}">Remove</button>
+                        <div class="card-title">
+                            <img src="{{image}}" width="100px" height="75px" data-src="{{image}}" class="img">
+                            <a href="{{link}}" target="_blank"><h4 class="article-title">{{title}}</h4></a>
+                        </div>
+                        <div class="card-content">
+                            <p>{{summary}}</p>
+                        </div>
+                        <div class="card-action">
+                            <button data-target="note-modal" class="btn right notes modal-trigger" type="submit" data-id="{{_id}}">Notes</button>
+                            <button class="btn right remove" type="submit" data-id="{{_id}}">Remove</button>
+                        </div>
                     </div>
                 {{/if}}
             {{/each}}
