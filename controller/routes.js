@@ -54,12 +54,15 @@ router.get("/articles/:id", function(req, res) {
 });
 
 //delete article note from db
-router.get("/articles/:id", function(req, res) {
-    db.Article.deleteOne({ _id: req.params.id })
+router.put("/articles/notes:id", function(req, res) {
+    db.Note.deleteOne({ _id: req.params.id }).then(function(dbNote) {
+        console.log(dbNote)
+        return db.Article.deleteOne({ _id: req.params.id}, { $pullAll: { notes: [dbNote._id] }})
+    })
     .catch(function(err) {
         console.log(err);
     });
-    res.send("Articles deleted")
+    res.send("Note deleted")
 });
 
 //update article notes

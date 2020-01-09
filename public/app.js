@@ -71,10 +71,23 @@ $(document).ready(function() {
                 <h5 class="note-title">${notes[i].title}</h5>
                 <div class="card-content">
                 <p>${notes[i].body}</p>
-                <button class="btn btn-small remove-note" type="submit" data-id="{{_id}}">&times;</button>
+                <button class="btn btn-small remove-note" type="submit" data-id="${notes[i]._id}">&times;</button>
                 </div>
                 </div>`)
             };
+
+            $(".remove-note").on("click", function(event) {
+                event.preventDefault();
+                console.log("click");
+                var id = $(this).attr("data-id");
+                console.log(id);
+                $.ajax({
+                    method: "PUT",
+                    url: "/articles/notes" + id,
+                }).then(function(data) {
+                    
+                });
+            })
         });
     });
 
