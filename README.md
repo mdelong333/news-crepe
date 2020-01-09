@@ -6,6 +6,6 @@ News-crepe is an app that scrapes recipe articles from Saveur. Users can save ar
 
 View deployed version _**[here](https://fathomless-gorge-71825.herokuapp.com/saved)**_
 
-![demo](./demo/news-crepe.gif)
+![demo](./public/demo/news-crepe.gif)
 
 ## 
