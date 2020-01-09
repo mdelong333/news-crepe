@@ -2,7 +2,7 @@
 <div id="note-modal" class="modal modal-fixed-footer">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 id="modal-title"></h4>
+            <h4 class="modal-head" id="modal-title"></h4>
         </div>
         <div class="modal-body">
             <div class="input-field col s6">
@@ -16,8 +16,10 @@
             <div class="note-div">
                 {{#if data.notes}}
                     {{#each data.notes}}
-                        <h3>{{data.notes.title}}</h3>
-                        <h5>{{data.notes.body}}</h5>
+                        <div class="note">
+                            <h3>{{data.notes.title}}</h3>
+                            <h5>{{data.notes.body}}</h5>
+                        </div>
                     {{/each}}
                 {{/if}}
             </div>
@@ -26,6 +28,6 @@
 
     <div class="modal-footer">
         <button class="btn" id="save-note" type="submit">Save Note</button>
-        <a href="#!" class="modal-close waves-effect waves-green btn">&times;</a>
+        <a href="#!" class="modal-close waves-effect btn">&times;</a>
     </div>
 </div>

@@ -20,6 +20,8 @@
 
 #save-note {
     margin-right: 10px;
+    background-color: #1b2a41;
+    font-family: 'Linden Hill', serif;
 }
 
 .input-field {
@@ -27,7 +29,7 @@
 }
 
 .modal-header {
-    border-bottom: 2px solid gray;
+    border-bottom: 2px solid #cd342e;
 }
 
 body {
@@ -41,7 +43,7 @@ body {
 .nav-link {
     font-size: 18px;
     font-family: 'Lora', serif;
-    color: #1b2a41;
+    color: #263238;
 }
 
 #home {
@@ -90,5 +92,11 @@ body {
 }
 
 .article-title {
+    font-family: 'Linden Hill', serif;
+    color: #263238;
+}
+
+.modal-head {
+    color: #263238;
     font-family: 'Linden Hill', serif;
 }
