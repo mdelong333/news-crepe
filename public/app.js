@@ -77,7 +77,6 @@ $(document).ready(function() {
             };
 
             $(".remove-note").on("click", function(event) {
-                event.preventDefault();
                 console.log("click");
                 var id = $(this).attr("data-id");
                 console.log(id);
@@ -85,7 +84,7 @@ $(document).ready(function() {
                     method: "PUT",
                     url: "/articles/notes" + id,
                 }).then(function(data) {
-                    
+                    location.reload();
                 });
             })
         });
@@ -106,6 +105,7 @@ $(document).ready(function() {
             console.log(data);
             $("#body").val("");
             $("#title").val("");
+            location.reload();
         });
     });
 });
