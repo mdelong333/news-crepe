@@ -14,10 +14,12 @@
             <label for="body">Note Body</label>
             </div>
             <div class="note-div">
-                {{#each articles}}
-                    <h3>{{notes.title}}</h3>
-                    <h5>{{notes.body}}</h5>
-                {{/each}}
+                {{#if data.notes}}
+                    {{#each data.notes}}
+                        <h3>{{data.notes.title}}</h3>
+                        <h5>{{data.notes.body}}</h5>
+                    {{/each}}
+                {{/if}}
             </div>
         </div>
     </div>

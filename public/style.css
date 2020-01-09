@@ -5,6 +5,9 @@
 #headline {
     padding: 30px;
     margin-top: 20px;
+    background-color: #cd342e;
+    color: #E4E4E4;
+    font-family: 'Calligraffitti', cursive;
 }
 
 .article-container {
@@ -25,4 +28,45 @@
 
 .modal-header {
     border-bottom: 2px solid gray;
+}
+
+body {
+    background-color: #e7dac2;
+}
+
+.nav-wrapper {
+    background-color: #D0B172;
+}
+
+.sidenav {
+    background-color: #e7dac2;
+}
+
+.side-link {
+    background-color: #D0B172;
+    border-bottom: 2px groove #e7dac2;
+    color: #1b2a41;
+}
+
+.brand-logo {
+    font-family: 'Calligraffitti', cursive;
+    margin-right: 15px;
+}
+
+.btn {
+    background-color: #1b2a41;
+    font-family: 'Linden Hill', serif;
+}
+
+.page-footer {
+    background-color: rgb(187, 159, 103);
+}
+
+.footer {
+    padding: 10px;
+    background-color: #263238;
+}
+
+.card-content {
+    border-top: solid 1px #cd342e;
 }
