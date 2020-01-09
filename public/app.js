@@ -62,16 +62,18 @@ $(document).ready(function() {
             console.log(data);
             $("#modal-title").text(data.title);
             $("#save-note").attr("data-id", data._id);
+            $(".note-div").empty();
+            
+            var notes = data.notes;
 
-            // if (data.notes) {
-            //     $(".note-div").append(`<div>
-            //     <h3>${data.notes.title}</h3>
-            //     <h5>${data.notes.body}</h5>
-            //     </div>`)
-            // }
-        })
-        
-    })
+            for (var i = 0; i < notes.length; i++) {
+                $(".note-div").append(`<div class="note-container card-panel">
+                <h5>${notes[i].title}</h5>
+                <p>${notes[i].body}</p>
+                </div>`)
+            };
+        });
+    });
 
     $("#save-note").on("click", function(event) {
         event.preventDefault();

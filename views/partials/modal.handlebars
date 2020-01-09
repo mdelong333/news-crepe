@@ -2,7 +2,7 @@
 <div id="note-modal" class="modal modal-fixed-footer">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-head" id="modal-title"></h4>
+            <h4 id="modal-title"></h4>
         </div>
         <div class="modal-body">
             <div class="input-field col s6">
@@ -13,21 +13,12 @@
             <textarea id="body" type="text" class="validate new-note materialize-textarea"></textarea>
             <label for="body">Note Body</label>
             </div>
-            <div class="note-div">
-                {{#if data.notes}}
-                    {{#each data.notes}}
-                        <div class="note">
-                            <h3>{{data.notes.title}}</h3>
-                            <h5>{{data.notes.body}}</h5>
-                        </div>
-                    {{/each}}
-                {{/if}}
-            </div>
+            <div class="note-div"></div>
         </div>
     </div>
 
     <div class="modal-footer">
         <button class="btn" id="save-note" type="submit">Save Note</button>
-        <a href="#!" class="modal-close waves-effect btn">&times;</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn">&times;</a>
     </div>
 </div>
