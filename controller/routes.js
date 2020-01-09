@@ -43,7 +43,7 @@ router.get("/articles", function(req, res) {
     });
 });
 
-//get article by id
+//get article by id for notes
 router.get("/articles/:id", function(req, res) {
     db.Article.findOne({ _id: req.params.id })
     .populate("notes").then(function(dbArticle) {
@@ -53,6 +53,16 @@ router.get("/articles/:id", function(req, res) {
     });
 });
 
+//delete article note from db
+router.get("/articles/:id", function(req, res) {
+    db.Article.deleteOne({ _id: req.params.id })
+    .catch(function(err) {
+        console.log(err);
+    });
+    res.send("Articles deleted")
+});
+
+//update article notes
 router.post("/articles/:id", function(req, res) {
     db.Note.create(req.body).then(function(dbNote) {
         return db.Article.findOneAndUpdate({ _id: req.params.id}, {$push: { notes: dbNote._id }}, { new: true });

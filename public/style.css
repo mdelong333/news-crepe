@@ -16,6 +16,8 @@
 
 .remove {
     margin-right: 10px;
+    background-color: #1b2a41;
+    font-family: 'Linden Hill', serif;
 }
 
 #save-note {
@@ -96,7 +98,12 @@ body {
     color: #263238;
 }
 
-.modal-head {
+.modal-header {
     color: #263238;
     font-family: 'Linden Hill', serif;
+}
+
+.note-title {
+    font-family: 'Linden Hill', serif;
+    color: #263238;
 }

@@ -68,8 +68,11 @@ $(document).ready(function() {
 
             for (var i = 0; i < notes.length; i++) {
                 $(".note-div").append(`<div class="note-container card-panel">
-                <h5>${notes[i].title}</h5>
+                <h5 class="note-title">${notes[i].title}</h5>
+                <div class="card-content">
                 <p>${notes[i].body}</p>
+                <button class="btn btn-small remove-note" type="submit" data-id="{{_id}}">&times;</button>
+                </div>
                 </div>`)
             };
         });
