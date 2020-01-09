@@ -107,9 +107,9 @@ router.get("/saved", function(req, res) {
 
 //delete all articles from db
 router.get("/clear", function(req, res) {
-    db.Article.deleteMany({})
-    db.Note.deleteMany({})
-    .catch(function(err) {
+    db.Article.deleteMany({}).then(function(notes) {
+        return db.Note.deleteMany({});
+    }).catch(function(err) {
         console.log(err);
     });
     res.send("Articles deleted")
